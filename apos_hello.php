@@ -25,8 +25,13 @@ License:     GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-// TODO: rename this class to a proper name for your plugin
-class apos_hello {
+class apos_bar {
+
+    var $defaults = array(
+        'apos_bar_text' => "",
+        'apos_bar_button' => "",
+        'load_apos_bar_in' => 'footer'
+    );
 
 	/*--------------------------------------------*
 	 * Constructor
@@ -37,81 +42,29 @@ class apos_hello {
 	 */
 	function __construct() {
 
-		// load plugin text domain
+		$this->option_name = '_' . $this->namespace . '--options';
+
 		add_action( 'init', array( $this, 'textdomain' ) );
-
-		// Register admin styles and scripts
-		add_action( 'admin_print_styles', array( $this, 'register_admin_styles' ) );
-		// add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
-
-		// Register site styles and scripts
-		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_styles' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts' ) );
-
 		register_activation_hook( __FILE__, array( $this, 'activate' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
 
-		add_action('admin_init', array( $this, 'apos_bar_admin_init' ) );
+		if( is_admin() ) {
+			add_action( 'admin_print_styles', array( $this, 'register_admin_styles' ) );
+			// add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
+			add_action('admin_init', array( $this, 'apos_bar_admin_init' ) );
+		    	add_action( 'admin_menu', array( $this, 'apos_hello_menu') );
+		} else {
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts' ) );
+		//TODO
+		add_action( 'wp_footer', array( $this, 'action_method_name' ) );
+		}
 
-	    /*
-	     * TODO:
-	     * Define the custom functionality for your plugin. The first parameter of the
-	     * add_action/add_filter calls are the hooks into which your code should fire.
-	     *
-	     * The second parameter is the function name located within this class. See the stubs
-	     * later in the file.
-	     *
-	     * For more information:
-	     * http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
-	     */
-	    add_action( 'wp_footer', array( $this, 'action_method_name' ) );
-	    // add_filter( 'TODO', array( $this, 'filter_method_name' ) );
-	    add_action( 'admin_menu', array( $this, 'apos_hello_menu') );
-
-	} // end constructor
+		} // end constructor
 
 	public function apos_bar_admin_init($value='')
 	{
-		// register_setting( 'apos_bar_options', 'apos_bar_options', array( $this,'apos_bar_options_validate') );
-		register_setting( 'apos_bar_options', 'apos_bar_options' );
-
-		add_settings_section('plugin_main', 'Main Settings2', 'plugin_section_text', 'apos-bar');
-		add_settings_field('apos_bar_text_string', 'Message or Call to Action', array( $this,'plugin_setting_string'), 'apos-bar', 'plugin_main');
-		add_settings_field('apos_bar_text_radio', 'Header / Footer', array( $this,'apos_bar_setting_radio'), 'apos-bar', 'plugin_main');
-		add_settings_field('apos_bar_text_string2', 'Button Text', array( $this,'plugin_setting_string2'), 'apos-bar', 'plugin_main');
-	}
-
-	public function plugin_setting_string($id) {
-		$options = get_option('apos_bar_options');
-		echo "<input id='plugin_text_string' name='apos_bar_options[text]' size='120' type='text' value='{$options['text']}' />";
-	}
-
-	public function plugin_setting_string2($id) {
-		$options = get_option('apos_bar_options');
-		echo "<input id='plugin_text_string' name='apos_bar_options[button]' size='40' type='text' value='{$options['button']}' />";
-	}
-
-	public function apos_bar_setting_radio($id) {
-		$options = get_option('apos_bar_options');
-		if (! $options["apos_bar_radio"]) { $options["apos_bar_radio"]="header"; }
-		?>
-		<label>
-			<input name="apos_bar_options[load]" type="radio" value="header" <?php checked('one', $options['load']); ?> /> Header
-		</label><br />
-		<label>
-			<input name="apos_bar_options[load]" type="radio" value="footer" <?php checked('two', $options['load']); ?> /> Footer
-		</label><br />
-		<br>
-		<span style="color:#666666;">Load the Apos Bar code in the header or footer</span>
-		<?php
-	}
-
-	public function apos_bar_options_validate($input) {
-		$newinput['text_string'] = trim($input['text_string']);
-		if(!preg_match('/^[a-z0-9]{32}$/i', $newinput['text_string'])) {
-		$newinput['text_string'] = '';
-		}
-		return $newinput;
+		register_setting( 'apos_bar_plugin_options', 'apos_bar_options', 'posk_validate_options' );
 	}
 
 	public function apos_hello_menu() {
@@ -122,24 +75,16 @@ class apos_hello {
 		if ( !current_user_can( 'manage_options' ) )  {
 			wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
 		}
-		?>
-		<div class="wrap">
-		<h2>My custom plugin</h2>
-		Options relating to the Custom Plugin.
-		<form action="options.php" method="post">
+	?>
+	<div class="wrap">
+		<div class="icon32" id="icon-options-general"><br></div>
+		<h2>Apos Bar Options</h2>
 
-		<?php settings_fields('apos_bar_options'); ?>
-		<?php do_settings_sections('apos-bar'); ?>
-		 
-		<?php submit_button(); ?>
-
-		</form></div>
-		 
 		<h2>Preview</h2>
 		<?php $options = get_option('apos_bar_options'); ?>
 		<div class="apos_hello">
 		    <span style="font-family: 'Arial, Helvetica, sans-serif;"><?php echo $options["text"]; ?>&nbsp;&nbsp;
-		        <a class="apos_hello-link" href="#"><?php echo $options["button"]; ?></a> </span>
+		        <a class="apos_hello-link" href="#"><?php echo $options["buttontxt"]; ?></a> </span>
 		        <a class="close-notify">
 		            <img class="images/apos_hello-up-arrow" src="<?php echo plugins_url( '/apos_hello/img/apos_hello-up-arrow.png');  ?>" />
 		        </a>
@@ -150,50 +95,90 @@ class apos_hello {
 		    </a>
 		</div>
 
-		<?php
+		<?php submit_button(); ?>
+
+		<!-- Beginning of the Plugin Options Form -->
+		<form method="post" action="options.php">
+			<?php settings_fields('apos_bar_plugin_options'); ?>
+			<?php $options = get_option('apos_bar_options'); ?>
+
+			<!-- Table Structure Containing Form Controls -->
+			<!-- Each Plugin Option Defined on a New Table Row -->
+			<table class="form-table">
+
+				<!-- Bar Content -->
+				<tr valign="top" style="border-top:#dddddd 1px solid;">
+					<th scope="row">Sample Text Area</th>
+					<td>
+						<textarea name="apos_bar_options[text]" rows="2" cols="80" type='textarea'><?php echo $options['text']; ?></textarea><br /><span style="color:#666666;margin-left:2px;">Add a comment here to give extra information to Plugin users</span>
+					</td>
+				</tr>
+
+				<tr>
+					<th scope="row">Enter Some Information</th>
+					<td>
+						<input type="text" size="40" name="apos_bar_options[buttontxt]" value="<?php echo $options['buttontxt']; ?>" />
+					</td>
+				</tr>
+
+				<tr>
+					<th scope="row">Link Display</th>
+					<td>
+						<select name='apos_bar_options[drp_select_box]'>
+							<option value='one' <?php selected('one', $options['drp_select_box']); ?>>Display as a hyperlink</option>
+							<option value='two' <?php selected('two', $options['drp_select_box']); ?>>Display as a button</option>
+						</select>
+						<span style="color:#666666;margin-left:2px;">Add a comment here to explain more about how to use the option above</span>
+					</td>
+				</tr>
+
+				<!-- Apos Bar uninstall -->
+				<tr><td colspan="2"><div style="margin-top:10px;"></div></td></tr>
+				<tr valign="top" style="border-top:#dddddd 1px solid;">
+					<th scope="row">Database Options</th>
+					<td>
+						<label><input name="apos_bar_options[chk_default_options_db]" type="checkbox" value="1" <?php if (isset($options['chk_default_options_db'])) { checked('1', $options['chk_default_options_db']); } ?> /> Restore defaults upon plugin deactivation/reactivation</label>
+						<br /><span style="color:#666666;margin-left:2px;">Only check this if you want to reset plugin settings upon Plugin reactivation</span>
+					</td>
+				</tr>
+
+
+			</table>
+			<?php submit_button(); ?>
+
+		</form>
+
+	</div>
+	<?php
 	}
 
-	/**
-	 * Fired when the plugin is activated.
-	 *
-	 * @params	$network_wide	True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog
-	 */
 	public function activate( $network_wide ) {
 		// TODO define activation functionality here
+			$tmp = get_option('apos_bar_options');
+    if(($tmp['chk_default_options_db']=='1')||(!is_array($tmp))) {
+		delete_option('apos_bar_options'); // so we don't have to reset all the 'off' checkboxes too! (don't think this is needed but leave for now)
+		$arr = array(	"txt" => "Change this text in the Options",
+				"buttontxt" => "ChangeMe!",
+		);
+		update_option('apos_bar_options', $arr);
+	}
+
 	} // end activate
 
-	/**
-	 * Fired when the plugin is deactivated.
-	 *
-	 * @params	$network_wide	True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog
-	 */
 	public function deactivate( $network_wide ) {
-		// TODO define deactivation functionality here
+		delete_option('posk_options');
 	} // end deactivate
 
-	/**
-	 * Loads the plugin text domain for translation
-	 */
 	public function textdomain() {
-		// TODO: replace "apos_hello-locale" with a unique value for your plugin
 		load_plugin_textdomain( 'apos_hello-locale', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 	}
 
-	/**
-	 * Registers and enqueues admin-specific styles.
-	 */
 	public function register_admin_styles() {
 		wp_enqueue_style( 'apos_hello-admin-styles', plugins_url( 'apos_hello/css/admin.css' ) );
 	} // end register_admin_styles
 
-	/**
-	 * Registers and enqueues admin-specific JavaScript.
-	 */
 	public function register_admin_scripts() {
-
-		// TODO change 'apos_hello' to the name of your plugin
 		wp_enqueue_script( 'apos_hello-admin-script', plugins_url( 'apos_hello/js/admin.js' ) );
-
 	} // end register_admin_scripts
 
 	/**
@@ -258,4 +243,4 @@ class apos_hello {
 
 } // end class
 
-$plugin_name = new apos_hello();
+$plugin_name = new apos_bar();
