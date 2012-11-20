@@ -1,0 +1,218 @@
+/* -------------------------------------------------- 
+	:: MAIN MOBILE ELEMENTS
+---------------------------------------------------*/
+.mLogo { max-width: 100%;text-align:center; img-align:center;  padding-top:50px;margin:0 auto;}
+
+.MobileCopyright { position:relative; text-align:center; img-align:center;  padding-top:60px; font-size:16px; color:#1c1c1c;font-family: 'TeXGyreAdventorBold', Arial, Helvetica, sans-serif;}
+
+.minfo { position:relative; text-align:center; img-align:center;  padding-top:40px; color:#1c1c1c;font-family: 'TeXGyreAdventorBold', Arial, Helvetica, sans-serif; font-size:18px;max-width:100%;}
+
+
+
+/* -------------------------------------------------- 
+	:: Mobile DOWNLOAD BUTTON - NOT USED IN DEMO
+---------------------------------------------------*/
+button.Mobileminimal {
+margin-top:15px;
+  margin-left:0px;
+  background: #e3e3e3;
+  border: 1px solid #bbb;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+  -moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+  box-shadow: inset 0 0 1px 1px #f6f6f6;
+  color: #1c1c1c;
+  max-width: 767px%; 
+  height: 45px; 
+  font-size:15px;
+  font-family: 'TeXGyreAdventorBold', Arial, Helvetica, sans-serif;
+  line-height: 1;
+  padding: 8px 0 9px
+  text-align: center;
+  text-shadow: 0 1px 0 #fff;x; }
+
+ button.Mobileminimal:hover {
+    background: #d9d9d9;
+    -webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+    -moz-box-shadow: inset 0 0 1px 1px #eaeaea;
+    box-shadow: inset 0 0 1px 1px #eaeaea;
+    color: #0099ff;
+    cursor: pointer; }
+
+button.Mobileminimal:active {
+    background: #d0d0d0;
+    -webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
+    -moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
+    box-shadow: inset 0 0 1px 1px #e3e3e3;
+    color: #000; }
+
+
+
+/* -------------------------------------------------- 
+	:: MOBILE VISIBILTY - FOUNDATION.ZURB.COM
+---------------------------------------------------*/
+	
+	.show-on-phones { display: none !important; }	
+	.show-on-tablets { display: none !important; }
+	.show-on-desktops { display: block !important; }
+	
+	.hide-on-phones { display: block !important; }	
+	.hide-on-tablets { display: block !important; }
+	.hide-on-desktops { display: none !important; }
+	
+	
+	/* Modernizr-enabled tablet targeting */
+	@media only screen and (max-width: 1280px) and (min-width: 768px) {
+		.touch .hide-on-phones { display: block !important; }
+		.touch .hide-on-tablets { display: none !important; }
+		.touch .hide-on-desktops { display: block !important; }
+		
+		.touch .show-on-phones { display: none !important; }
+		.touch .show-on-tablets { display: block !important; }
+		.touch .show-on-desktops { display: none !important; }
+	}
+	
+		
+	@media only screen and (max-width: 767px) {
+		.hide-on-phones { display: none !important; }
+		.hide-on-tablets { display: block !important; }
+		.hide-on-desktops { display: block !important; }
+		
+		.show-on-phones { display: block !important; }
+		.show-on-tablets { display: none !important; }
+		.show-on-desktops { display: none !important; }
+	}
+	
+	
+	/* Specific overrides for elements that require something other than display: block */
+	
+	table.show-on-desktops { display: table !important; }
+	table.hide-on-phones { display: table !important; }	
+	table.hide-on-tablets { display: table !important; }
+	
+	@media only screen and (max-width: 1280px) and (min-width: 768px) {
+		.touch table.hide-on-phones { display: table !important; }
+		.touch table.hide-on-desktops { display: table !important; }
+		.touch table.show-on-tablets { display: table !important; }
+	}
+	
+	@media only screen and (max-width: 767px) {
+		table.hide-on-tablets { display: table !important; }
+		table.hide-on-desktops { display: table !important; }
+		table.show-on-phones { display: table !important; }
+	}
+
+
+
+/* -------------------------------------------------- 
+	:: Mobile WOAHbar
+---------------------------------------------------*/
+
+.mwoahbar
+{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 32px;  /* << set custom WOAHbar height */
+  z-index: 100;   /* << DO NOT EDIT, KEEPS WOAHbar ON TOP OF PAGE CONTENT */
+  padding: 15px 0 5px 0;
+  text-align: center;
+  font-size: 14px;  /* << set custom WOAHbar font size */
+  color: #1c1c1c;  /* << set custom WOAHbar font color */
+  background-color: #ffff00;  /* << set custom bar color here */
+  border-bottom: 0px solid #1c1c1c;  /* << set custom bottom border thickness & color here */
+  -webkit-box-shadow: 0 8px 6px -6px #333;  /* << set custom css box shadow */
+  -moz-box-shadow: 0 8px 6px -6px #333;  /* << set custom css box shadow */
+  box-shadow: 0 8px 6px -6px #333;   /* << set custom css box shadow */
+}
+ 
+.mwoahbar-stub
+{
+  position: fixed;
+  top: -10px;
+  left: 0px;
+  width: 100%;
+  height: 19px;
+  z-index: 200;
+  padding: 7px 0 5px 0;
+  text-align: center;
+}
+ 
+.mwoahbar span
+{
+  float: left;
+  width: 95%;
+  text-align: center;
+  padding-top: 2px;
+}
+ 
+.mshow-notify
+{
+ -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: 3px solid #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.35);
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.35);
+  float: right;
+  margin-right: 10px;
+  color: #fff;
+  width: 35px;
+  height: 33px;
+  text-decoration: none;
+  background-color: #eee; /* << set custom bar color here */
+  cursor:pointer;
+}
+
+.mshow-notify:hover {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: 3px solid #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,0.35);
+  -moz-box-shadow: 0 0 5px rgba(0,0,0,0.35);
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.35);
+  float: right;
+  margin-right: 10px;
+  color: #fff;
+  width: 35px;
+  height: 33px;
+  text-decoration: none;
+  background-color: #ffff00; /* << set custom bar color here */
+  cursor:pointer;
+}
+
+.mwoahbar-up-arrow:hover {
+  background: url(woahbar-up-arrow-hover.png);
+}
+
+.mclose-notify
+{
+  padding-top: -15px;
+  color: #fff;
+  margin-left:10px;
+  height: 19px;
+  text-decoration: none;
+  background-color: #ffff00; /* << set custom bar color here */
+  cursor:pointer;
+}
+ 
+.mwoahbar-link
+{
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  background: #d72444; /* Old browsers */
+  color: white;
+  padding: 1px 8px 3px 8px;
+}
+ 
+.mwoahbar-link:hover
+{
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  background: #1c1c1c; /* Old browsers */
+  color: white;
+  padding: 1px 8px 3px 8px;
+  text-decoration: none;

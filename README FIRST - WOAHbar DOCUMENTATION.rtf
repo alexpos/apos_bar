@@ -1,0 +1,143 @@
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf540
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 Courier;\f2\fnil\fcharset0 LucidaGrande;
+}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww25040\viewh15040\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 \
+\
+* WOAHbar - Hellobar Alternative * \
+\
+\
+Usage Documentation Provided by: \
+Haatch Creative Design | http://haatch.com\
+\
+Visit the working demo at: http://haatch.com/WOAHbar\
+\
+*DISCLAIMER: Neither the WOAHbar name or the original coding from which these source files and subsequent modified coding was created by me. I have simply modified it and am providing demo, source files and written documentation for those who wish to implement the WOAHbar into their website.\
+\
+Original Code/Information Provided by: \
+http://blog.jobdeals.com/2011/12/free-hellobar-com-alternative-source-code/\
+\
+\
+**********************************************************************************************************************************************************************************************************************************************************\
+\
+\
+   Unzip the WOAHbar Source Files Package\
+\
+\
+**********************************************************************************************************************************************************************************************************************************************************\
+\
+\
+STEP 1 - CALL MAIN JS SCRIPTS: \
+\
+You will need to add the following scripts BEFORE the </head> tag of your webpage for any of the following to work properly:\
+\
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>\
+\
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>\
+\
+*NOTE: You may already be calling one or both of these scripts in the page for other javascript purposes, so you may need to delete one or both lines for the WOAHbar to work properly. \
+\pard\pardeftab720\ql\qnatural
+
+\f1\fs26 \cf0    
+\f0\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+\cf0 \
+**********************************************************************************************************************************************************************************************************************************************************\
+\
+\
+STEP 2 - UPLOAD WOAHbar.js FILE:\
+ \
+Upload the WOAHbar.js file to the js folder of the website(s) you wish to use WOAHbar on. If you don't have a folder labeled "js", you will need to create this first before proceeding.\
+Now call the js file on your page using the following code  BEFORE the </head> tag: \
+\
+<script type="text/javascript" src="js/WOAHbar.js"></script> \
+\
+\
+*NOTE: You may need to include the full path to the file ie: \
+\
+<script type="text/javascript" src="http://yoursite.com/js/WOAHbar.js"></script> \
+\
+\
+**********************************************************************************************************************************************************************************************************************************************************\
+\
+\
+STEP 3 - ADD WOAHbar.css FILE CONTENTS:\
+ \
+Simply add the contents of WOAHbar.css to your current CSS styling via copy/paste, thereby having the styling called automatically with the rest of your sites styles, \
+\
+   - OR -\
+\
+You can add the contents of WOAHbar.css to your web page via copy/paste. Put the contents of the file between the following tags before your </head> tag:\
+\
+<style type="text/css">\
+\
+// PUT WOAHbar.css Contents Here //\
+\
+<style>\
+\
+\
+**********************************************************************************************************************************************************************************************************************************************************\
+\
+\
+STEP 4 - UPLOAD WOAHbar IMAGE FOLDER:\
+ \
+Simply upload the folder marked "images" to the root or folder where the WOAHbar will be located. The WOAHbar.css, WOAHbar.js and WOAHbar Content all have image paths beginning with images/ \
+If you already have a folder marked "images", simply upload the folder contents to that folder and you are all set!\
+\
+   - OR -\
+\
+You can upload the images directly to the root and call the images by removing the images/ and simply leaving the image name, or upload the images to the folder of your choosing; ie: arrows, thus having to change the file path to arrows/\
+\
+\
+**********************************************************************************************************************************************************************************************************************************************************\
+\
+\
+STEP 5 - ADD WOAHbar CONTENT TO WEB PAGE:\
+\
+Now, just add the following to the webpage either AFTER the main <body> tag or BEFORE the closing </body> tag\
+\
+<div class="woahbar" style="display: none;"><span style="font-family: 'Arial, Helvetica, sans-serif;">PUT YOUR WOAHbar MESSAGE OR CALL TO ACTION HERE &nbsp;&nbsp;<a class="woahbar-link" href="#">BUTTON TEXT</a> </span> <a class="close-notify" onclick="woahbar_hide();"><img class="images/woahbar-up-arrow" src="images/woahbar-up-arrow.png" /></a></div>\
+<div class="woahbar-stub" style="display: none;"><a class="show-notify" onclick="woahbar_show();"><img class="woahbar-down-arrow" src="images/woahbar-down-arrow.png" /></a></div>\
+\
+*NOTE: Make sure you remove the # just before the BUTTON TEXT and replace it with the url link; ie: http://yoursite.com\
+\
+**********************************************************************************************************************************************************************************************************************************************************\
+\
+\
+\pard\pardeftab720\sl420\ql\qnatural
+\cf0 STEP 6 - CUSTOMIZE WOAHbar STYLING AND ACTION:\
+\
+The WOAHbar.css file contains the styling for a WOAHbar that has a Bright Yellow background color with Dark Grey drop shadow. The Open/Close Stub has a Light Grey background color when in closed position and a Bright Yellow color on hover. These colors are easily changed by customizing the WOAHbar.css file, which is marked with the areas to make these changes\
+\
+The WOAHbar.js file contains the workings of the WOAHbar. The current settings are set to show the WOAHbar immediately upon page load and to bounce 3 times traveling a distance of 15px. It is also set to push the contents of the page downward 32px (the set height of the WOAHbar on open, and return the page contents to their normal position on close.\
+\
+These settings can be changed per the markup within the WOAHbar.js file.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+\cf0 \
+\
+**********************************************************************************************************************************************************************************************************************************************************\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural\pardirnatural
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+\cf0 *JUST ADDED: \
+Full documentation & source files for the mobile version of WOAHbar, called mWOAHbar, are located in the included folder titled "
+\f2\fs26 mWHOAbar - MOBILE VERSION SOURCE FILES"
+\f0\fs24 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\ql\qnatural\pardirnatural
+\cf0 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+\cf0 **********************************************************************************************************************************************************************************************************************************************************\
+\
+\
+Again, I take this opportunity to re-iterate the fact that neither the WOAHbar name or the original coding from which these source files and subsequent modified coding was created by me. I have simply modified it and am providing demo, source files and written documentation for those who wish to implement the WOAHbar into their website and cannot be held responsible for any damage, loss of data or any other malfunction due to the implementation of the files, codes or documentation provided.\
+\
+If you have any questions, or need assistance with any of the setup or functionality of your new WOAHbar, please feel free to email me at: woahbar@haatch.com \
+Please, no spam or advertisements. Thank you!\
+\
+\
+}
