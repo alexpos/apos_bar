@@ -81,7 +81,9 @@ class apos_bar {
 		<h2>Apos Bar Options</h2>
 
 		<h2>Preview</h2>
-		<?php $options = get_option('apos_bar_options'); ?>
+		<?php $options = get_option('apos_bar_options');
+		print_r($options);
+		?>
 		<div class="apos_bar">
 		    <span style="font-family: 'Arial, Helvetica, sans-serif;"><?php echo $options["text"]; ?>&nbsp;&nbsp;
 		        <a class="apos_bar-link" href="#"><?php echo $options["buttontxt"]; ?></a> </span>
@@ -122,6 +124,17 @@ class apos_bar {
 				</tr>
 
 				<tr>
+					<th scope="row">Placement</th>
+					<td>
+						<select name='apos_bar_options[placement]'>
+							<option value='top' <?php selected('top', $options['placement']); ?>>Display at the top</option>
+							<option value='bottom' <?php selected('bottom', $options['placement']); ?>>Display at the bottom</option>
+						</select>
+						<span style="color:#666666;margin-left:2px;">Add a comment here to explain more about how to use the option above</span>
+					</td>
+				</tr>
+
+<!-- 				<tr>
 					<th scope="row">Link Display</th>
 					<td>
 						<select name='apos_bar_options[drp_select_box]'>
@@ -131,7 +144,7 @@ class apos_bar {
 						<span style="color:#666666;margin-left:2px;">Add a comment here to explain more about how to use the option above</span>
 					</td>
 				</tr>
-
+ -->
 				<!-- Apos Bar uninstall -->
 				<tr><td colspan="2"><div style="margin-top:10px;"></div></td></tr>
 				<tr valign="top" style="border-top:#dddddd 1px solid;">
@@ -153,20 +166,18 @@ class apos_bar {
 	}
 
 	public function activate( $network_wide ) {
-		// TODO define activation functionality here
-			$tmp = get_option('apos_bar_options');
-    if(($tmp['chk_default_options_db']=='1')||(!is_array($tmp))) {
-		delete_option('apos_bar_options'); // so we don't have to reset all the 'off' checkboxes too! (don't think this is needed but leave for now)
-		$arr = array(	"txt" => "Change this text in the Options",
+		$tmp = get_option('apos_bar_options');
+		 if(($tmp['chk_default_options_db']=='1')||(!is_array($tmp))) {
+			delete_option('apos_bar_options'); // so we don't have to reset all the 'off' checkboxes too! (don't think this is needed but leave for now)
+			$arr = array(	"txt" => "Change this text in the Options",
 				"buttontxt" => "ChangeMe!",
-		);
+				);
 		update_option('apos_bar_options', $arr);
-	}
-
+		}
 	} // end activate
 
 	public function deactivate( $network_wide ) {
-		delete_option('posk_options');
+		delete_option('apos_bar_options');
 	} // end deactivate
 
 	public function textdomain() {
@@ -181,25 +192,13 @@ class apos_bar {
 		wp_enqueue_script( 'apos_bar-admin-script', plugins_url( 'apos_bar/js/admin.js' ) );
 	} // end register_admin_scripts
 
-	/**
-	 * Registers and enqueues plugin-specific styles.
-	 */
 	public function register_plugin_styles() {
-
-		// TODO change 'apos_bar' to the name of your plugin
 		wp_enqueue_style( 'apos_bar-styles', plugins_url( 'apos_bar/css/display.css' ) );
-
 	} // end register_plugin_styles
 
-	/**
-	 * Registers and enqueues plugin-specific scripts.
-	 */
 	public function register_plugin_scripts() {
-
-		// TODO change 'apos_bar' to the name of your plugin
 		wp_enqueue_script( 'apos_bar-plugin-script', plugins_url( 'apos_bar/js/display.js' ) , array('jquery', 'jquery-ui-core', 'jquery-effects-core', 'jquery-effects-bounce'));
 		wp_enqueue_script( 'cookie', plugins_url( 'apos_bar/js/jquery.cookie.js' ) , array('jquery'));
-
 	} // end register_plugin_scripts
 
 	/*--------------------------------------------*
@@ -209,15 +208,15 @@ class apos_bar {
 	function action_method_name() {
 		$options = get_option('apos_bar_options');
 		?>
-		<div class="apos_bar" style="display: none;">
-			<span style="font-family: 'Arial, Helvetica, sans-serif;"><?php echo $options["text"]; ?>&nbsp;&nbsp;
+		<div class="apos_bar <?php echo ($options["placement"]=="top") ?  "apos_bar_top" : "apos_bar_bottom" ?>" style="display: none;">
+			<span style="font-family: 'Arial, Helvetica, sans-serif;"><?php echo $options["apos_bar_plm"]; ?>/<?php echo $options["text"]; ?>&nbsp;&nbsp;
 			    <a class="apos_bar-link" href="#"><?php echo $options["buttontxt"]; ?></a>
 			</span>
 			<a class="close-notify">
 			    <img class="apos_bar-up-arrow" src="<?php echo plugins_url( '/apos_bar/img/up.png');  ?>" />
 			</a>
 		 </div>
-		<div class="apos_bar-stub" style="display: none;">
+		<div class="apos_bar-stub <?php echo ($options["placement"]=="top") ?  "apos_bar-stub_top" : "apos_bar-stub_bottom" ?>" style="display: none;">
 			<a class="show-notify">
 			    <img class="apos_bar-down-arrow" src="<?php echo plugins_url('/apos_bar/img/down.png'); ?>" />
 			</a>

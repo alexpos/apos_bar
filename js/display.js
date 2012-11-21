@@ -6,16 +6,18 @@ var stub_showing = false;
     function apos_bar_show() {
         $.removeCookie('aposbar', { path: '/' });
         if(stub_showing) {
-            $('.apos_bar-stub').slideUp('fast', function() {
-            $('.apos_bar').show('bounce', { times:3, distance:15 }, 300);
-            $('body').animate({"marginTop": "32px"}, 300);
-          });
+            $('.apos_bar-stub').hide().slideUp('slow', function() {
+              $('.apos_bar.apos_bar_bottom').show('bounce', { direction:'down', times:3, distance:15 }, 300);
+              $('.apos_bar.apos_bar_top').show('bounce', { times:3, distance:15 }, 300);
+              $('body').animate({"marginTop": "32px"}, 300);
+            });
         }
         else {
           if($.cookie("aposbar")=="hidebar") {
             show_stub();
           } else {
-            $('.apos_bar').effect('bounce', { times: 3, distance: 15 }, 500);
+            $('.apos_bar.apos_bar_bottom').show('bounce', { direction:'down', times:3, distance:15 }, 300);
+            $('.apos_bar.apos_bar_top').show('bounce', { times:3, distance:15 }, 300);
             $('body').animate({"marginTop": "32px"}, 250);
           }
         }
