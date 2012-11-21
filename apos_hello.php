@@ -86,12 +86,12 @@ class apos_bar {
 		    <span style="font-family: 'Arial, Helvetica, sans-serif;"><?php echo $options["text"]; ?>&nbsp;&nbsp;
 		        <a class="apos_bar-link" href="#"><?php echo $options["buttontxt"]; ?></a> </span>
 		        <a class="close-notify">
-		            <img class="images/apos_bar-up-arrow" src="<?php echo plugins_url( '/apos_bar/img/apos_bar-up-arrow.png');  ?>" />
+		            <img class="images/apos_bar-up-arrow" src="<?php echo plugins_url( '/apos_bar/img/up.png');  ?>" />
 		        </a>
 	        	</div>
 		<div class="apos_bar-stub" style="display: none;">
 		    <a class="show-notify">
-		        <img class="apos_bar-down-arrow" src="<?php echo plugins_url('/apos_bar/img/apos_bar-down-arrow.png'); ?>" />
+		        <img class="apos_bar-down-arrow" src="<?php echo plugins_url('/apos_bar/img/down.png'); ?>" />
 		    </a>
 		</div>
 
@@ -198,6 +198,7 @@ class apos_bar {
 
 		// TODO change 'apos_bar' to the name of your plugin
 		wp_enqueue_script( 'apos_bar-plugin-script', plugins_url( 'apos_bar/js/display.js' ) , array('jquery', 'jquery-ui-core', 'jquery-effects-core', 'jquery-effects-bounce'));
+		wp_enqueue_script( 'cookie', plugins_url( 'apos_bar/js/jquery.cookie.js' ) , array('jquery'));
 
 	} // end register_plugin_scripts
 

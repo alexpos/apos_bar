@@ -73,7 +73,7 @@ cursor:pointer;
 }
 
 .apos_bar-up-arrow:hover {
-background: url(apos_bar-up-arrow-hover.png);
+background: url(../img/up-hover.png);
 }
 
 .close-notify {
