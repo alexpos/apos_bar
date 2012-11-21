@@ -3,26 +3,26 @@ jQuery(function($){
 
 var stub_showing = false;
 
-    function apos_hello_show() {
+    function apos_bar_show() {
         if(stub_showing) {
-          $('.apos_hello-stub').slideUp('fast', function() {
-            $('.apos_hello').show('bounce', { times:3, distance:15 }, 300);
+          $('.apos_bar-stub').slideUp('fast', function() {
+            $('.apos_bar').show('bounce', { times:3, distance:15 }, 300);
             $('body').animate({"marginTop": "32px"}, 300);
           });
         }
         else {
-        $('.apos_hello').effect('bounce', { times: 3, distance: 15 }, 500);
+        $('.apos_bar').effect('bounce', { times: 3, distance: 15 }, 500);
           $('body').animate({"marginTop": "32px"}, 250);
         }
     }
 
   $("a.show-notify").click(function(e) {
-    apos_hello_show();
+    apos_bar_show();
   });
 
   $("a.close-notify").click(function(e) {
-        $('.apos_hello').slideUp('fast', function() {
-          $('.apos_hello-stub').show('bounce', { times:3, distance:15 }, 100);
+        $('.apos_bar').slideUp('fast', function() {
+          $('.apos_bar-stub').show('bounce', { times:3, distance:15 }, 100);
           stub_showing = true;
         });
 
@@ -32,5 +32,5 @@ var stub_showing = false;
   });
 
      window.setTimeout(function() {
-        apos_hello_show();
+        apos_bar_show();
   });});

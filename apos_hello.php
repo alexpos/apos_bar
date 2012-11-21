@@ -52,7 +52,7 @@ class apos_bar {
 			add_action( 'admin_print_styles', array( $this, 'register_admin_styles' ) );
 			// add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
 			add_action('admin_init', array( $this, 'apos_bar_admin_init' ) );
-		    	add_action( 'admin_menu', array( $this, 'apos_hello_menu') );
+		    	add_action( 'admin_menu', array( $this, 'apos_bar_menu') );
 		} else {
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts' ) );
@@ -67,7 +67,7 @@ class apos_bar {
 		register_setting( 'apos_bar_plugin_options', 'apos_bar_options', 'posk_validate_options' );
 	}
 
-	public function apos_hello_menu() {
+	public function apos_bar_menu() {
 		add_options_page( 'My Plugin Options', 'Apos Bar', 'manage_options', 'apos-bar', array($this, 'apos_bar_options_page') );
 	}
 
@@ -82,16 +82,16 @@ class apos_bar {
 
 		<h2>Preview</h2>
 		<?php $options = get_option('apos_bar_options'); ?>
-		<div class="apos_hello">
+		<div class="apos_bar">
 		    <span style="font-family: 'Arial, Helvetica, sans-serif;"><?php echo $options["text"]; ?>&nbsp;&nbsp;
-		        <a class="apos_hello-link" href="#"><?php echo $options["buttontxt"]; ?></a> </span>
+		        <a class="apos_bar-link" href="#"><?php echo $options["buttontxt"]; ?></a> </span>
 		        <a class="close-notify">
-		            <img class="images/apos_hello-up-arrow" src="<?php echo plugins_url( '/apos_hello/img/apos_hello-up-arrow.png');  ?>" />
+		            <img class="images/apos_bar-up-arrow" src="<?php echo plugins_url( '/apos_bar/img/apos_bar-up-arrow.png');  ?>" />
 		        </a>
 	        	</div>
-		<div class="apos_hello-stub" style="display: none;">
+		<div class="apos_bar-stub" style="display: none;">
 		    <a class="show-notify">
-		        <img class="apos_hello-down-arrow" src="<?php echo plugins_url('/apos_hello/img/apos_hello-down-arrow.png'); ?>" />
+		        <img class="apos_bar-down-arrow" src="<?php echo plugins_url('/apos_bar/img/apos_bar-down-arrow.png'); ?>" />
 		    </a>
 		</div>
 
@@ -170,15 +170,15 @@ class apos_bar {
 	} // end deactivate
 
 	public function textdomain() {
-		load_plugin_textdomain( 'apos_hello-locale', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
+		load_plugin_textdomain( 'apos_bar-locale', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' );
 	}
 
 	public function register_admin_styles() {
-		wp_enqueue_style( 'apos_hello-admin-styles', plugins_url( 'apos_hello/css/admin.css' ) );
+		wp_enqueue_style( 'apos_bar-admin-styles', plugins_url( 'apos_bar/css/admin.css' ) );
 	} // end register_admin_styles
 
 	public function register_admin_scripts() {
-		wp_enqueue_script( 'apos_hello-admin-script', plugins_url( 'apos_hello/js/admin.js' ) );
+		wp_enqueue_script( 'apos_bar-admin-script', plugins_url( 'apos_bar/js/admin.js' ) );
 	} // end register_admin_scripts
 
 	/**
@@ -186,8 +186,8 @@ class apos_bar {
 	 */
 	public function register_plugin_styles() {
 
-		// TODO change 'apos_hello' to the name of your plugin
-		wp_enqueue_style( 'apos_hello-styles', plugins_url( 'apos_hello/css/display.css' ) );
+		// TODO change 'apos_bar' to the name of your plugin
+		wp_enqueue_style( 'apos_bar-styles', plugins_url( 'apos_bar/css/display.css' ) );
 
 	} // end register_plugin_styles
 
@@ -196,8 +196,8 @@ class apos_bar {
 	 */
 	public function register_plugin_scripts() {
 
-		// TODO change 'apos_hello' to the name of your plugin
-		wp_enqueue_script( 'apos_hello-plugin-script', plugins_url( 'apos_hello/js/display.js' ) , array('jquery', 'jquery-ui-core', 'jquery-effects-core', 'jquery-effects-bounce'));
+		// TODO change 'apos_bar' to the name of your plugin
+		wp_enqueue_script( 'apos_bar-plugin-script', plugins_url( 'apos_bar/js/display.js' ) , array('jquery', 'jquery-ui-core', 'jquery-effects-core', 'jquery-effects-bounce'));
 
 	} // end register_plugin_scripts
 
@@ -205,27 +205,22 @@ class apos_bar {
 	 * Core Functions
 	 *---------------------------------------------*/
 
-	/**
- 	 * Note:  Actions are points in the execution of a page or process
-	 *        lifecycle that WordPress fires.
-	 *
-	 *		  WordPress Actions: http://codex.wordpress.org/Plugin_API#Actions
-	 *		  Action Reference:  http://codex.wordpress.org/Plugin_API/Action_Reference
-	 *
-	 */
 	function action_method_name() {
 		$options = get_option('apos_bar_options');
 		?>
-	<div class="apos_hello" style="display: none;">
-	    <span style="font-family: 'Arial, Helvetica, sans-serif;"><?php echo $options["text"]; ?>&nbsp;&nbsp;
-	        <a class="apos_hello-link" href="#"><?php echo $options["button"]; ?></a> </span>
-	        <a class="close-notify">
-	            <img class="images/apos_hello-up-arrow" src="<?php echo plugins_url( '/apos_hello/img/apos_hello-up-arrow.png');  ?>" /></a>
-	        </div>
-	<div class="apos_hello-stub" style="display: none;">
-	    <a class="show-notify">
-	        <img class="apos_hello-down-arrow" src="<?php echo plugins_url('/apos_hello/img/apos_hello-down-arrow.png'); ?>" /></a></div>
-
+		<div class="apos_bar" style="display: none;">
+			<span style="font-family: 'Arial, Helvetica, sans-serif;"><?php echo $options["text"]; ?>&nbsp;&nbsp;
+			    <a class="apos_bar-link" href="#"><?php echo $options["buttontxt"]; ?></a>
+			</span>
+			<a class="close-notify">
+			    <img class="apos_bar-up-arrow" src="<?php echo plugins_url( '/apos_bar/img/up.png');  ?>" />
+			</a>
+		 </div>
+		<div class="apos_bar-stub" style="display: none;">
+			<a class="show-notify">
+			    <img class="apos_bar-down-arrow" src="<?php echo plugins_url('/apos_bar/img/down.png'); ?>" />
+			</a>
+		</div>
 	<?php
 	} // end action_method_name
 

@@ -1,22 +1,26 @@
-.apos_hello {
-position: fixed;
-top: 0px;
-left: 0px;
-width: 100%;
-height: 32px;  /* << set custom apos_hello height */
-z-index: 100;   /* << DO NOT EDIT, KEEPS apos_hello ON TOP OF PAGE CONTENT */
-padding: 15px 0 5px 0;
-text-align: center;
-font-size: 16px;  /* << set custom apos_hello font size */
-color: #1c1c1c;  /* << set custom apos_hello font color */
-background-color: #ffff00;  /* << set custom bar color here */
-border-bottom: 0px solid #1c1c1c;  /* << set custom bottom border thickness & color here */
--webkit-box-shadow: 0 8px 6px -6px #333;  /* << set custom css box shadow */
--moz-box-shadow: 0 8px 6px -6px #333;  /* << set custom css box shadow */
-box-shadow: 0 8px 6px -6px #333;   /* << set custom css box shadow */
+.apos_bar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 27px; /*  Slider height            */
+  line-height: 30px;
+  z-index: 100;
+  padding: 0 0 5px 0;
+  text-align: center;
+  font-size: 16px;
+  font-weight: normal;
+  color: #fff;
+  background-color: #EB593C;
+  box-shadow: 0px 0px 5px #888888;
+  -moz-box-shadow:0px 0px 5px #888888;
+  -webkit-box-shadow:0px 0px 5px #888888;
+  border-bottom: 3px solid #fff;
+  font-family: Georgia,Times New Roman,Times,serif;
+  text-decoration: none;
 }
 
-.apos_hello-stub {
+.apos_bar-stub {
 position: fixed;
 top: -10px;
 left: 0px;
@@ -27,7 +31,7 @@ padding: 7px 0 5px 0;
 text-align: center;
 }
 
-.apos_hello span {
+.apos_bar span {
 float: left;
 width: 95%;
 text-align: center;
@@ -51,7 +55,6 @@ background-color: #eee; /* << set custom bar color here */
 cursor:pointer;
 }
 
-
 .show-notify:hover {
 -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
@@ -69,9 +72,8 @@ background-color: #ffff00; /* << set custom bar color here */
 cursor:pointer;
 }
 
-
-.apos_hello-up-arrow:hover {
-background: url(apos_hello-up-arrow-hover.png);
+.apos_bar-up-arrow:hover {
+background: url(apos_bar-up-arrow-hover.png);
 }
 
 .close-notify {
@@ -82,24 +84,25 @@ color: #fff;
 width: 17px;
 height: 19px;
 text-decoration: none;
-background-color: #ffff00; /* << set custom bar color here */
+/*background-color: #ffff00;  << set custom bar color here */
 cursor:pointer;
 }
 
-
-
-.apos_hello-link {
+.apos_bar-link {
 -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
-background: #d72444; /* Old browsers */
+/*background: #d72444;*/
+background: #d72444 -webkit-linear-gradient(top, #4a4844 0%,#2d2c29 100%);
 color: white;
 padding: 1px 8px 3px 8px;
+-webkit-box-shadow: 1px 1px 3px rgba(0,0,0,0.28);
+    text-decoration: none;
 }
 
-.apos_hello-link:hover {
+.apos_bar-link:hover {
 -moz-border-radius: 3px;
 -webkit-border-radius: 3px;
-background: #1c1c1c; /* Old browsers */
+background: #1c1c1c;
 color: white;
 padding: 1px 8px 3px 8px;
 text-decoration: none;
