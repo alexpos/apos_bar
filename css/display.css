@@ -85,8 +85,13 @@ background-color: #ffff00; /* << set custom bar color here */
 cursor:pointer;
 }
 
+/*.apos_bar_top .apos_bar-up-arrow:hover {*/
+/*.apos_bar_top .apos_bar-up-arrow:hover {*/
+/*background: url(../img/up-hover.png);*/
+/*}*/
+/*.apos_bar_bottom .apos_bar-up-arrow:hover {*/
 .apos_bar-up-arrow:hover {
-background: url(../img/up-hover.png);
+  background: url(../img/up-hoverb.png);
 }
 
 .close-notify {

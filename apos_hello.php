@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Apos Hello Bar
+Plugin Name: Apos Top Bar
 Plugin URI:  http://poslavsky.com
-Description: Hello Bar inspired barr
+Description: Hello Bar inspired bar
 Version:     0.1
 Author:      plovs
 Author URI:  http://poslavsky.com
@@ -27,23 +27,14 @@ License:     GPL2
 
 class apos_bar {
 
-    var $defaults = array(
-        'apos_bar_text' => "",
-        'apos_bar_button' => "",
-        'load_apos_bar_in' => 'footer'
-    );
+public $defaults = array(
+	'text' => "Changeme!",
+	'buttontxt' => "Changeme too!",
+	'placement' => 'top',
+	'load_apos_bar_in' => 'footer',
+);
 
-	/*--------------------------------------------*
-	 * Constructor
-	 *--------------------------------------------*/
-
-	/**
-	 * Initializes the plugin by setting localization, filters, and administration functions.
-	 */
 	function __construct() {
-
-		$this->option_name = '_' . $this->namespace . '--options';
-
 		add_action( 'init', array( $this, 'textdomain' ) );
 		register_activation_hook( __FILE__, array( $this, 'activate' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
@@ -59,8 +50,7 @@ class apos_bar {
 		//TODO
 		add_action( 'wp_footer', array( $this, 'action_method_name' ) );
 		}
-
-		} // end constructor
+	} // end constructor
 
 	public function apos_bar_admin_init($value='')
 	{
@@ -81,7 +71,8 @@ class apos_bar {
 		<h2>Apos Bar Options</h2>
 
 		<h2>Preview</h2>
-		<?php $options = get_option('apos_bar_options');
+		<?php
+		$options = wp_parse_args(get_option('apos_bar_options'), $this->defaults);
 		print_r($options);
 		?>
 		<div class="apos_bar">
@@ -102,17 +93,15 @@ class apos_bar {
 		<!-- Beginning of the Plugin Options Form -->
 		<form method="post" action="options.php">
 			<?php settings_fields('apos_bar_plugin_options'); ?>
-			<?php $options = get_option('apos_bar_options'); ?>
 
-			<!-- Table Structure Containing Form Controls -->
-			<!-- Each Plugin Option Defined on a New Table Row -->
 			<table class="form-table">
 
 				<!-- Bar Content -->
 				<tr valign="top" style="border-top:#dddddd 1px solid;">
 					<th scope="row">Sample Text Area</th>
 					<td>
-						<textarea name="apos_bar_options[text]" rows="2" cols="80" type='textarea'><?php echo $options['text']; ?></textarea><br /><span style="color:#666666;margin-left:2px;">Add a comment here to give extra information to Plugin users</span>
+						<textarea name="apos_bar_options[text]" rows="2" cols="80" type='textarea'><?php echo $options['text']; ?></textarea>
+						<br /><span style="color:#666666;margin-left:2px;">Add a comment here to give extra information to Plugin users</span>
 					</td>
 				</tr>
 
@@ -166,14 +155,6 @@ class apos_bar {
 	}
 
 	public function activate( $network_wide ) {
-		$tmp = get_option('apos_bar_options');
-		 if(($tmp['chk_default_options_db']=='1')||(!is_array($tmp))) {
-			delete_option('apos_bar_options'); // so we don't have to reset all the 'off' checkboxes too! (don't think this is needed but leave for now)
-			$arr = array(	"txt" => "Change this text in the Options",
-				"buttontxt" => "ChangeMe!",
-				);
-		update_option('apos_bar_options', $arr);
-		}
 	} // end activate
 
 	public function deactivate( $network_wide ) {
@@ -206,19 +187,20 @@ class apos_bar {
 	 *---------------------------------------------*/
 
 	function action_method_name() {
-		$options = get_option('apos_bar_options');
+		$options = wp_parse_args(get_option('apos_bar_options'), $this->defaults);
 		?>
 		<div class="apos_bar <?php echo ($options["placement"]=="top") ?  "apos_bar_top" : "apos_bar_bottom" ?>" style="display: none;">
-			<span style="font-family: 'Arial, Helvetica, sans-serif;"><?php echo $options["apos_bar_plm"]; ?>/<?php echo $options["text"]; ?>&nbsp;&nbsp;
+			<span style="font-family: 'Arial, Helvetica, sans-serif;"><?php echo $options["text"]; ?>&nbsp;&nbsp;
 			    <a class="apos_bar-link" href="#"><?php echo $options["buttontxt"]; ?></a>
 			</span>
 			<a class="close-notify">
-			    <img class="apos_bar-up-arrow" src="<?php echo plugins_url( '/apos_bar/img/up.png');  ?>" />
+			    <img class="apos_bar-up-arrow" src="<?php $img=(($options["placement"]=="top") ?  'up.png' : 'upb.png'); echo plugins_url('/apos_bar/img/' . $img); ?>" />
 			</a>
 		 </div>
 		<div class="apos_bar-stub <?php echo ($options["placement"]=="top") ?  "apos_bar-stub_top" : "apos_bar-stub_bottom" ?>" style="display: none;">
 			<a class="show-notify">
-			    <img class="apos_bar-down-arrow" src="<?php echo plugins_url('/apos_bar/img/down.png'); ?>" />
+			    <img class="apos_bar-down-arrow"
+			    	src="<?php $img=(($options["placement"]=="top") ?  'down.png' : 'downb.png'); echo plugins_url('/apos_bar/img/' . $img); ?>" />
 			</a>
 		</div>
 	<?php
