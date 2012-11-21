@@ -4,7 +4,6 @@ Donate link: http://poslavsky.com/thankme
 Tags: bar, toolbar, popup, notification bar
 Requires at least: 3.1
 Tested up to: 3.4
-Stable tag: 0.1
 
 Apos Bar WordPress plugin is a simple plugin that allows you to add a notification bar on your wordpress blog.
 
@@ -38,6 +37,10 @@ the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1
 
 - Created a WordPress plugin from the [WOAHbar][wb], using [WordPress Boilerplate Plugin][wpb]
 - Added top / bottom option
+
+= 0.2 = 
+
+- Added color picker for the bar
 
 == Upgrade Notice ==
 

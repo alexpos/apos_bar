@@ -3,7 +3,7 @@
 Plugin Name: Apos Top Bar
 Plugin URI:  http://poslavsky.com
 Description: Hello Bar inspired bar
-Version:     0.1
+Version:     0.2
 Author:      plovs
 Author URI:  http://poslavsky.com
 License:     GPL2
