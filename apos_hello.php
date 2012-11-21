@@ -41,7 +41,7 @@ public $defaults = array(
 
 		if( is_admin() ) {
 			add_action( 'admin_print_styles', array( $this, 'register_admin_styles' ) );
-			// add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts' ) );
 			add_action('admin_init', array( $this, 'apos_bar_admin_init' ) );
 		    	add_action( 'admin_menu', array( $this, 'apos_bar_menu') );
 		} else {
@@ -73,22 +73,10 @@ public $defaults = array(
 		<h2>Preview</h2>
 		<?php
 		$options = wp_parse_args(get_option('apos_bar_options'), $this->defaults);
-		print_r($options);
+		// print_r($options);
+		$this->draw_bar("admin");
+		submit_button();
 		?>
-		<div class="apos_bar">
-		    <span style="font-family: 'Arial, Helvetica, sans-serif;"><?php echo $options["text"]; ?>&nbsp;&nbsp;
-		        <a class="apos_bar-link" href="#"><?php echo $options["buttontxt"]; ?></a> </span>
-		        <a class="close-notify">
-		            <img class="images/apos_bar-up-arrow" src="<?php echo plugins_url( '/apos_bar/img/up.png');  ?>" />
-		        </a>
-	        	</div>
-		<div class="apos_bar-stub" style="display: none;">
-		    <a class="show-notify">
-		        <img class="apos_bar-down-arrow" src="<?php echo plugins_url('/apos_bar/img/down.png'); ?>" />
-		    </a>
-		</div>
-
-		<?php submit_button(); ?>
 
 		<!-- Beginning of the Plugin Options Form -->
 		<form method="post" action="options.php">
@@ -111,6 +99,22 @@ public $defaults = array(
 						<input type="text" size="40" name="apos_bar_options[buttontxt]" value="<?php echo $options['buttontxt']; ?>" />
 					</td>
 				</tr>
+
+				<tr>
+					<th scope="row">Background Color</th>
+					<td>
+						<input type="text" size="10" name="apos_bar_options[bcolor]" value="<?php echo $options['bcolor']; ?>" />
+					</td>
+				</tr>
+
+				<tr>
+					<th scope="row">Background Color</th>
+					<td>
+					     <input type="text" id="color1" name="apos_bar_options[bcolor]"  value="<?php echo $options['bcolor']; ?>" name="color_picker_color1" />
+					     <div id="color_picker_color1"></div>
+					</td>
+				</tr>
+
 
 				<tr>
 					<th scope="row">Placement</th>
@@ -166,11 +170,15 @@ public $defaults = array(
 	}
 
 	public function register_admin_styles() {
-		wp_enqueue_style( 'apos_bar-admin-styles', plugins_url( 'apos_bar/css/admin.css' ) );
+		wp_enqueue_style( 'farbtastic' );
+		wp_enqueue_style( 'apos_bar-admin-styles', plugins_url( 'apos_bar/css/display.css' ) );
+		// wp_enqueue_style( 'apos_bar-admin-styles', plugins_url( 'apos_bar/css/admin.css' ) );
 	} // end register_admin_styles
 
 	public function register_admin_scripts() {
 		wp_enqueue_script( 'apos_bar-admin-script', plugins_url( 'apos_bar/js/admin.js' ) );
+		wp_enqueue_script( 'farbtastic' );
+
 	} // end register_admin_scripts
 
 	public function register_plugin_styles() {
@@ -185,16 +193,24 @@ public $defaults = array(
 	/*--------------------------------------------*
 	 * Core Functions
 	 *---------------------------------------------*/
-
-	function action_method_name() {
+	function draw_bar($type) {
 		$options = wp_parse_args(get_option('apos_bar_options'), $this->defaults);
+		$class = ($type=="admin") ?  "apos_bar apos_bar_admin" : "apos_bar";
+		$class.= ($options["placement"]=="top") ?  " apos_bar_top" : " apos_bar_bottom";
 		?>
-		<div class="apos_bar <?php echo ($options["placement"]=="top") ?  "apos_bar_top" : "apos_bar_bottom" ?>" style="display: none;">
+		<style type="text/css" id="custom-apos-bar-colors">
+		.apos_bar, .show-notify:hover {
+		  background-color: <?php echo $options['bcolor']; ?>;
+		}
+
+		</style>
+		<div class="<?php echo $class; ?>" <?php echo ($type=="admin") ?  "" : " style='display: none;'" ?>">
 			<span style="font-family: 'Arial, Helvetica, sans-serif;"><?php echo $options["text"]; ?>&nbsp;&nbsp;
 			    <a class="apos_bar-link" href="#"><?php echo $options["buttontxt"]; ?></a>
 			</span>
 			<a class="close-notify">
-			    <img class="apos_bar-up-arrow" src="<?php $img=(($options["placement"]=="top") ?  'up.png' : 'upb.png'); echo plugins_url('/apos_bar/img/' . $img); ?>" />
+			    <img class="apos_bar-up-arrow"
+			    src="<?php $img=(($options["placement"]=="top") ?  'up.png' : 'upb.png'); echo plugins_url('/apos_bar/img/' . $img); ?>" />
 			</a>
 		 </div>
 		<div class="apos_bar-stub <?php echo ($options["placement"]=="top") ?  "apos_bar-stub_top" : "apos_bar-stub_bottom" ?>" style="display: none;">
@@ -204,6 +220,12 @@ public $defaults = array(
 			</a>
 		</div>
 	<?php
+
+	}
+
+
+	function action_method_name() {
+		$this->draw_bar();
 	} // end action_method_name
 
 	/**

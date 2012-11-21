@@ -1,6 +1,7 @@
 (function ($) {
 	"use strict";
 	$(function () {
-		// Place your administration-specific JavaScript here
+            console.log("color");
+                $('#color_picker_color1').farbtastic('#color1');            
 	});
 }(jQuery));

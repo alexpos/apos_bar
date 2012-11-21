@@ -1,3 +1,10 @@
+.apos_bar_admin {
+  width: 90% !important;
+  position: relative !important;
+  left: auto !important;
+}
+
+
 .apos_bar {
   position: fixed;
   left: 0px;
@@ -21,10 +28,12 @@
 .apos_bar_top {
   top: 0px;
   border-bottom: 3px solid #fff;
+  border-top: none;
 }
 
 .apos_bar_bottom {
   bottom: 0px;
+  border-bottom: none;
   border-top: 3px solid #fff;
 }
 
@@ -81,16 +90,14 @@ color: #fff;
 width: 35px;
 height: 33px;
 text-decoration: none;
-background-color: #ffff00; /* << set custom bar color here */
+background-color: #EB593C;
 cursor:pointer;
 }
 
-/*.apos_bar_top .apos_bar-up-arrow:hover {*/
-/*.apos_bar_top .apos_bar-up-arrow:hover {*/
-/*background: url(../img/up-hover.png);*/
-/*}*/
-/*.apos_bar_bottom .apos_bar-up-arrow:hover {*/
-.apos_bar-up-arrow:hover {
+.apos_bar_top .apos_bar-up-arrow:hover {
+background: url(../img/up-hover.png);
+}
+.apos_bar_bottom .apos_bar-up-arrow:hover {
   background: url(../img/up-hoverb.png);
 }
 

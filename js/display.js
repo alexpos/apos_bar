@@ -7,6 +7,7 @@ var stub_showing = false;
         $.removeCookie('aposbar', { path: '/' });
         if(stub_showing) {
             $('.apos_bar-stub').hide().slideUp('slow', function() {
+            // $('.apos_bar-stub').slideUp('fast', function() {
               $('.apos_bar.apos_bar_bottom').show('bounce', { direction:'down', times:3, distance:15 }, 300);
               $('.apos_bar.apos_bar_top').show('bounce', { times:3, distance:15 }, 300);
               $('body').animate({"marginTop": "32px"}, 300);
@@ -24,7 +25,7 @@ var stub_showing = false;
     }
 
     function show_stub(){
-          $('.apos_bar-stub').show('bounce', { times:3, distance:15 }, 100);
+          $('.apos_bar-stub').show('bounce', { times:3, distance:10 }, 100);
           stub_showing = true;
     }
 
@@ -49,7 +50,9 @@ var stub_showing = false;
 
      window.setTimeout(function() {
         if($.cookie("aposbar")=="hidebar") {
+         // $('.apos_bar').hide();
           show_stub();
+          console.log("should be hidden");
         } else {
           apos_bar_show();
         }
